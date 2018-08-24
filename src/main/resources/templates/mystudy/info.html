@@ -1,0 +1,157 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+	<head>
+	<meta charset="utf-8">
+	<title>学习_凌青子个人博客 - 一个站在Java程序设计之路的技术员个人博客网站</title>
+	<meta name="keywords" content="个人博客,凌青子个人博客,凌青子" />
+	<meta name="description" content="一个站在Java程序设计之路的技术员个人博客网站。" />
+	<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+	<link rel="icon" type="image/x-icon" href="images/icon/favicon.png">
+	<link th:href="@{/css/base.css}" href="css/base.css" rel="stylesheet">
+	<link th:href="@{/css/index.css}" href="css/index.css" rel="stylesheet">
+	<link th:href="@{/css/m.css}" href="css/m.css" rel="stylesheet">
+	
+	<!--[if lt IE 9]>
+	<script src="js/modernizr.js"></script>
+	<![endif]-->
+	<script>
+	window.onload = function ()
+	{
+		var oH2 = document.getElementsByTagName("h2")[0];
+		var oUl = document.getElementsByTagName("ul")[0];
+		oH2.onclick = function ()
+		{
+			var style = oUl.style;
+			style.display = style.display == "block" ? "none" : "block";
+			oH2.className = style.display == "block" ? "open" : ""
+		}
+	}
+	</script>
+	</head>
+	<body>
+		<header>
+		  <div class="tophead">
+		    <div class="logo"><a th:href="@{/index}" href="/">凌青子个人博客</a></div>
+		    <nav class="topnav" id="topnav">
+		      <ul>
+		        <li><a th:href="@{/index}" >网站首页</a></li>
+		        <li><a th:href="@{/me/index}" >关于我</a></li>
+		        <li><a id="topnav_current" th:href="@{/mystudy/index}" >我的学习</a></li>
+		        <li><a th:href="@{/myfun/index}" >我的娱乐</a></li>
+		        <li><a th:href="@{/life/index}" >慢生活</a></li>
+		        <li><a th:href="@{/message/index}" >留言</a></li>
+		      </ul>
+		    </nav>
+		  </div>
+		</header>
+		<article>
+		  <h1 class="t_nav"><span>不要轻易放弃。学习成长的路上，我们长路漫漫，只因学无止境。 </span><a th:href="@{/index}" class="n1">网站首页</a><a th:href="@{/mystudy/index}" class="n2">我的学习</a></h1>
+		  <div class="infos">
+		    <div class="newsview">
+		      <h3 class="news_title" th:text="${bean.title}">个人博客，属于我的小世界！</h3>
+		      <div class="news_author">
+		      	<span class="au01"><a href="mailto:865815412@qq.com">凌青子</a></span>
+		      	<span class="au02" th:text="${bean.createTime}"></span>
+		      	<span class="au03">共<b th:text="${bean.views}">
+		      	<script src="/e/public/ViewClick/?classid=5&amp;id=816&amp;addclick=1"></script>0</b>人围观</span></div>
+		      <div class="tags" th:if="${lables!=null}">
+		      	<a th:each="lable:${lables}" th:utext="${' &nbsp;' + lable.name + ' &nbsp;'}">标签名称</a>
+		      </div>
+		      <div class="news_about" th:text="${bean.descM}"><strong>简介</strong></div>
+		      <div class="news_infos" th:utext="${bean.content}"></div> 
+		    </div>
+		    <div class="share"> </div>
+		    <div class="nextinfo">
+		      <p th:if="${previous != null}">上一篇：<a th:href="@{http://localhost/blog/mystudy/info/} + ${previous.id}" th:text="${previous.title}"></a></p>
+		      <p th:if="${next != null}">下一篇：<a th:href="@{http://localhost/blog/mystudy/info/} + ${next.id}" th:text="${next.title}"></a></p>
+		    </div>
+		    <div class="otherlink">
+		      <h2>相关文章</h2>
+		      <ul>
+		        <li><a href="/download/div/2018-04-22/815.html" title="html5个人博客模板《黑色格调》">html5个人博客模板《黑色格调》</a></li>
+		        <li><a href="/download/div/2018-04-18/814.html" title="html5个人博客模板主题《清雅》">html5个人博客模板主题《清雅》</a></li>
+		        <li><a href="/download/div/2018-03-18/807.html" title="html5个人博客模板主题《绅士》">html5个人博客模板主题《绅士》</a></li>
+		        <li><a href="/download/div/2018-02-22/798.html" title="html5时尚个人博客模板-技术门户型">html5时尚个人博客模板-技术门户型</a></li>
+		        <li><a href="/download/div/2017-09-08/789.html" title="html5个人博客模板主题《心蓝时间轴》">html5个人博客模板主题《心蓝时间轴》</a></li>
+		        <li><a href="/download/div/2017-07-16/785.html" title="古典个人博客模板《江南墨卷》">古典个人博客模板《江南墨卷》</a></li>
+		        <li><a href="/download/div/2017-07-13/783.html" title="古典风格-个人博客模板">古典风格-个人博客模板</a></li>
+		        <li><a href="/download/div/2015-06-28/748.html" title="个人博客《草根寻梦》―手机版模板">个人博客《草根寻梦》―手机版模板</a></li>
+		        <li><a href="/download/div/2015-04-10/746.html" title="【活动作品】柠檬绿兔小白个人博客模板">【活动作品】柠檬绿兔小白个人博客模板</a></li>
+		        <li><a href="/jstt/bj/2015-01-09/740.html" title="【匆匆那些年】总结个人博客经历的这四年…">【匆匆那些年】总结个人博客经历的这四年…</a></li>
+		      </ul>
+		    </div>
+		    <div class="news_pl">
+		      <h2>文章评论</h2>
+		      <ul>
+		        <div class="gbko"> </div>
+		      </ul>
+		    </div>
+		  </div>
+		  <div class="sidebar">
+			<div class="search">
+		      <form action="/e/search/index.php" method="post" name="searchform" id="searchform">
+		        <input name="keyboard" id="keyboard" class="input_text" value="请输入关键字" style="color: rgb(153, 153, 153);" onfocus="if(value=='请输入关键字'){this.style.color='#000';value=''}" onblur="if(value==''){this.style.color='#999';value='请输入关键字'}" type="text">
+		        <input name="show" value="title" type="hidden">
+		        <input name="tempid" value="1" type="hidden">
+		        <input name="tbname" value="news" type="hidden">
+		        <input name="Submit" class="input_submit" value="搜索" type="submit">
+		      </form>
+		    </div>
+		    <div class="lmnav">
+		      <h2 class="hometitle">栏目导航</h2>
+		      <ul class="navbor">
+				<li><a th:href="@{/index}" >网站首页</a></li>
+		        <li><a th:href="@{/me/index}" >关于我</a></li>
+		        <li><a th:href="@{/mystudy/index}" >我的学习</a></li>
+		        <li><a th:href="@{/myfun/index}" >我的娱乐</a></li>
+		        <li><a th:href="@{/life/index}" >慢生活</a></li>
+		        <li><a th:href="@{/message/index}" >留言</a></li>
+		      </ul>
+		    </div>
+		    <div class="cloud">
+		      <h2 class="hometitle">标签云</h2>
+		      <ul>
+		        <a th:each="list:${listLable}" th:href="@{/search/byLabel?lid=} + ${list.id}" th:text="${list.name}"></a> 
+		      </ul>
+		    </div>
+		    <div class="paihang">
+		      <h2 class="hometitle">点击排行</h2>
+		      <ul>
+		        <li th:each="list:${list}">
+		        	<a th:href="${list.id }" style="width: auto;">
+			        	<b th:text="${list.title}" style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;"></b>
+			          	<p>
+			          	<i><img th:src="${list.image}" style="width: 100%;"></i>
+			          		<div th:text="${list.descM}" style="overflow : hidden;text-overflow: ellipsis;display: -webkit-box;-webkit-line-clamp: 4;-webkit-box-orient: vertical;"></div>
+			          	</p>
+		          	</a>
+		        </li>
+		      </ul>
+		    </div>
+	    
+		    <div class="weixin" align="center">
+				<h2 class="hometitle">官方微信</h2>
+				<ul><img style="width: 75%;height: 75%;" src="/blog/images/pic/qrcode.png"></ul>
+	    	</div>
+		  </div>
+		</article>
+		<div class="blank"></div>
+		<footer>
+		  <p>Design by <a>凌青子个人博客</a> <!-- <a href="/">蜀ICP备11002373号-1</a> --></p>
+		</footer>
+		<script src="js/nav.js"></script> 
+		<script type="text/javascript">
+		jQuery.noConflict();
+		jQuery(function() { 
+		    var elm = jQuery('#left_flow2'); 
+		    var startPos = jQuery(elm).offset().top; 
+		    jQuery.event.add(window, "scroll", function() { 
+		        var p = jQuery(window).scrollTop(); 
+		        jQuery(elm).css('position',((p) > startPos) ? 'fixed' : ''); 
+		
+		        jQuery(elm).css('top',((p) > startPos) ? '0' : '');
+		    }); 
+		}); 
+		</script>
+	</body>
+</html>

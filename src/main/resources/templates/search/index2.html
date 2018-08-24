@@ -1,0 +1,44 @@
+﻿<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<title>搜索_凌青子个人博客 - 一个站在Java程序设计之路的技术员个人博客网站</title>
+		<meta name="keywords" content="个人博客,凌青子个人博客,凌青子" />
+		<meta name="description" content="一个站在Java程序设计之路的技术员个人博客网站。" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link type="text/css" rel="stylesheet" th:href="@{/search/css/style.css}">
+	</head>
+	<body>
+	<h1 style="margin-right: 15%;">凌青子个人博客</h1>
+	<section class="list-wrap">
+	  <label for="search-text">关键字搜索</label><br>
+	  <input type="text" th:value="${search}" id="search" placeholder="关键字搜索" class="search-box">
+	  <span onclick="search()" style="padding-top: 0.5em;padding-right: 0.5em;padding-bottom: 0.5em;padding-left: 0.5em;float:left;text-align:center;margin-left: 15px;color: #00BDE8;">搜索</span>
+	  <span class="list-count"></span>
+		<ul id="list">
+		  <li class="in" th:each="list:${list}">
+		  	<a th:if="${list!=null}" th:utext="${list.title}" th:href="${'mystudy/info/' + list.id}"></a>
+		  	<span th:if="${list==null}" class="empty-item">无数据</span>
+		  </li>
+		  	
+		</ul>
+	</section>
+	
+	<div style="text-align:center;margin:50px 0; font:normal 14px/24px 'MicroSoft YaHei';">
+	<p>适用浏览器：360、FireFox、Chrome、Safari、Opera、傲游、搜狗、世界之窗. 不支持IE8及以下浏览器。</p>
+	<p>来源：<a th:href="@{/index}" >回到首页</a></p>
+	</div>
+	
+	<script type="text/javascript" th:src="@{/search/js/jquery.min.js}" ></script>
+	<script type="text/javascript" th:src="@{/search/js/index.js}" ></script>
+	<script type="text/javascript" th:src="@{/js/jquery-2.1.1.min.js}"></script>
+	<script type="text/javascript">
+		function search(){
+			var search = $("#search").val();
+			url = "/blog/search?search=" + search;
+			location.replace(url);
+		}
+	</script>
+	
+	</body>
+</html>
