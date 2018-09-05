@@ -23,11 +23,7 @@ spring:
     driver-class-name: com.mysql.jdbc.Driver
 #    url: jdbc:mysql://localhost:3306/user?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true
 #    username: root
-#    password: root
-    
-    url: jdbc:mysql://124.161.16.164:11306/db_web_service?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true
-    username: root
-    password: 123456
+#    password: 
     
     filters: stat,wall,log4j
     maxActive: 20
