@@ -58,7 +58,7 @@
 		      	<a th:each="lable:${lables}" th:utext="${' &nbsp;' + lable.name + ' &nbsp;'}">标签名称</a>
 		      </div>
 		      <div class="news_about" th:text="${bean.descM}"><strong>简介</strong></div>
-		      <div class="news_infos" th:utext="${bean.content}"></div> 
+		      <div class="news_infos" th:utext="${bean.content}" style="overflow: scroll;overflow-y:hidden;"></div> 
 		    </div>
 		    <div class="share"> </div>
 		    <div class="nextinfo">
@@ -66,24 +66,15 @@
 		      <p th:if="${next != null}">下一篇：<a th:href="@{http://localhost/blog/mystudy/info/} + ${next.id}" th:text="${next.title}"></a></p>
 		    </div>
 		    <div class="otherlink">
-		      <h2>相关文章</h2>
+		      <h2>相关推荐</h2>
 		      <ul>
-		        <li><a href="/download/div/2018-04-22/815.html" title="html5个人博客模板《黑色格调》">html5个人博客模板《黑色格调》</a></li>
-		        <li><a href="/download/div/2018-04-18/814.html" title="html5个人博客模板主题《清雅》">html5个人博客模板主题《清雅》</a></li>
-		        <li><a href="/download/div/2018-03-18/807.html" title="html5个人博客模板主题《绅士》">html5个人博客模板主题《绅士》</a></li>
-		        <li><a href="/download/div/2018-02-22/798.html" title="html5时尚个人博客模板-技术门户型">html5时尚个人博客模板-技术门户型</a></li>
-		        <li><a href="/download/div/2017-09-08/789.html" title="html5个人博客模板主题《心蓝时间轴》">html5个人博客模板主题《心蓝时间轴》</a></li>
-		        <li><a href="/download/div/2017-07-16/785.html" title="古典个人博客模板《江南墨卷》">古典个人博客模板《江南墨卷》</a></li>
-		        <li><a href="/download/div/2017-07-13/783.html" title="古典风格-个人博客模板">古典风格-个人博客模板</a></li>
-		        <li><a href="/download/div/2015-06-28/748.html" title="个人博客《草根寻梦》―手机版模板">个人博客《草根寻梦》―手机版模板</a></li>
-		        <li><a href="/download/div/2015-04-10/746.html" title="【活动作品】柠檬绿兔小白个人博客模板">【活动作品】柠檬绿兔小白个人博客模板</a></li>
-		        <li><a href="/jstt/bj/2015-01-09/740.html" title="【匆匆那些年】总结个人博客经历的这四年…">【匆匆那些年】总结个人博客经历的这四年…</a></li>
+		        <li th:each="list:${listRandom}"><a th:href="${'/blog/mystudy/info/' + list.id }" th:title="${list.title }" th:text="${list.title }"></a></li>
 		      </ul>
 		    </div>
 		    <div class="news_pl">
 		      <h2>文章评论</h2>
 		      <ul>
-		        <div class="gbko"> </div>
+		        <div class="gbko"> 暂未开启该功能</div>
 		      </ul>
 		    </div>
 		  </div>
@@ -139,19 +130,23 @@
 		<footer>
 		  <p>Design by <a>凌青子个人博客</a> <!-- <a href="/">蜀ICP备11002373号-1</a> --></p>
 		</footer>
-		<script src="js/nav.js"></script> 
-		<script type="text/javascript">
-		jQuery.noConflict();
-		jQuery(function() { 
-		    var elm = jQuery('#left_flow2'); 
-		    var startPos = jQuery(elm).offset().top; 
-		    jQuery.event.add(window, "scroll", function() { 
-		        var p = jQuery(window).scrollTop(); 
-		        jQuery(elm).css('position',((p) > startPos) ? 'fixed' : ''); 
 		
-		        jQuery(elm).css('top',((p) > startPos) ? '0' : '');
-		    }); 
-		}); 
+		<script th:src="@{/js/jquery-2.1.1.min.js}"></script>
+		<!-- GoTop -->
+		<div class="scroll" id="scroll" style="display:none;">回到顶部</div>
+		<script type="text/javascript">
+		$(function(){
+			showScroll();
+			function showScroll(){
+				$(window).scroll( function() { 
+					var scrollValue=$(window).scrollTop();
+					scrollValue > 100 ? $('div[class=scroll]').fadeIn():$('div[class=scroll]').fadeOut();
+				} );	
+				$('#scroll').click(function(){
+					$("html,body").animate({scrollTop:0},200);	
+				});	
+			}
+		})
 		</script>
 	</body>
 </html>

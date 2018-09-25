@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 	<head>
 	<meta charset="utf-8">
-	<title>生活_凌青子个人博客 - 一个站在Java程序设计之路的技术员个人博客网站</title>
+	<title>娱乐_凌青子个人博客 - 一个站在Java程序设计之路的技术员个人博客网站</title>
 	<meta name="keywords" content="个人博客,凌青子个人博客,凌青子" />
 	<meta name="description" content="一个站在Java程序设计之路的技术员个人博客网站。" />
 	<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
@@ -37,15 +37,15 @@
 		        <li><a th:href="@{/index}" >网站首页</a></li>
 		        <li><a th:href="@{/me/index}" >关于我</a></li>
 		        <li><a th:href="@{/mystudy/index}" >我的学习</a></li>
-		        <li><a th:href="@{/myfun/index}" >我的娱乐</a></li>
-		        <li><a id="topnav_current" th:href="@{/life/index}" >慢生活</a></li>
+		        <li><a id="topnav_current" th:href="@{/myfun/index}" >我的娱乐</a></li>
+		        <li><a th:href="@{/life/index}" >慢生活</a></li>
 		        <li><a th:href="@{/message/index}" >留言</a></li>
 		      </ul>
 		    </nav>
 		  </div>
 		</header>
 		<article>
-		  <h1 class="t_nav"><span>不要轻易放弃。学习成长的路上，我们长路漫漫，只因学无止境。 </span><a th:href="@{/index}" class="n1">网站首页</a><a th:href="@{/life/index}" class="n2">慢生活</a></h1>
+		  <h1 class="t_nav"><span>不要轻易放弃。学习成长的路上，我们长路漫漫，只因学无止境。 </span><a th:href="@{/index}" class="n1">网站首页</a><a th:href="@{/myfun/index}" class="n2">我的娱乐</a></h1>
 		  <div class="infos">
 		    <div class="newsview">
 		      <h3 class="news_title" th:text="${bean.title}">个人博客，属于我的小世界！</h3>
@@ -64,7 +64,7 @@
 		    <div class="otherlink">
 		      <h2>相关推荐</h2>
 		      <ul>
-		        <li th:each="list:${listRandom}"><a th:href="${'/blog/life/info/' + list.id }" th:title="${list.title }" th:text="${list.title }"></a></li>
+		        <li th:each="list:${listRandom}"><a th:href="${'/blog/myfun/info/' + list.id }" th:title="${list.title }" th:text="${list.title }"></a></li>
 		      </ul>
 		    </div>
 		    <div class="news_pl">
@@ -126,8 +126,8 @@
 		<footer>
 		  <p>Design by <a>凌青子个人博客</a> <!-- <a href="/">蜀ICP备11002373号-1</a> --></p>
 		</footer>
-		<script th:src="@{/js/jquery-2.1.1.min.js}"></script>
 		
+		<script th:src="@{/js/jquery-2.1.1.min.js}"></script>
 		<!-- GoTop -->
 		<div class="scroll" id="scroll" style="display:none;">回到顶部</div>
 		<script type="text/javascript">

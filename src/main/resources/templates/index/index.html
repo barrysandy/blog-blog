@@ -76,8 +76,8 @@
 	<article>
 	  <div class="blogs">
 	    <li th:each="list:${list}"> 
-	    	<span class="blogpic"><a th:href="${'mystudy/info/' + list.id }" href="/"><img th:src="${list.image}" src=""></a></span>
-	      	<h3 class="blogtitle" style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;"><a th:href="${'mystudy/info/' + list.id }" href="/" th:text="${list.title}"></a></h3>
+	    	<span class="blogpic"><a th:href="${'mystudy/info/' + list.id }" href="/"><img th:src="${list.image}" onerror="this.src='/blog/images/zd02.jpg'"></a></span>
+	      	<h3 class="blogtitle" style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;"><a th:href="${'mystudy/info/' + list.id }" th:text="${list.title}"></a></h3>
 	      	<div class="bloginfo">
 	        	<p th:text="${list.descM}"></p>
 	      	</div>
@@ -136,7 +136,7 @@
 	        	<a th:href="${'mystudy/info/' + list.id }" style="width: auto;">
 		        	<b th:text="${list.title}" style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;"></b>
 		          	<p>
-		          	<i><img th:src="${list.image}" style="width: 100%;"></i>
+		          	<i><img th:src="${list.image}" onerror="this.src='/blog/images/zd02.jpg'" style="width: 100%;height: auto;"></i>
 		          		<div th:text="${list.descM}" style="overflow : hidden;text-overflow: ellipsis;display: -webkit-box;-webkit-line-clamp: 4;-webkit-box-orient: vertical;"></div>
 		          	</p>
 	          	</a>
@@ -152,10 +152,29 @@
 	  </div>
 	</article>
 	<div class="blank"></div>
+	
 	<footer>
 	  <p>Design by <a>凌青子个人博客</a> <!-- <a href="/">蜀ICP备11002373号-1</a> --></p>
 	</footer>
 	<script th:src="@{/js/nav.js}" src="js/nav.js"></script>
 	<script th:src="@{/js/jquery-2.1.1.min.js}"></script>
+	
+	<!-- GoTop -->
+	<div class="scroll" id="scroll" style="display:none;">回到顶部</div>
+	<script type="text/javascript">
+	$(function(){
+		showScroll();
+		function showScroll(){
+			$(window).scroll( function() { 
+				var scrollValue=$(window).scrollTop();
+				scrollValue > 100 ? $('div[class=scroll]').fadeIn():$('div[class=scroll]').fadeOut();
+			} );	
+			$('#scroll').click(function(){
+				$("html,body").animate({scrollTop:0},200);	
+			});	
+		}
+	})
+	</script>
+
 	</body>
 </html>

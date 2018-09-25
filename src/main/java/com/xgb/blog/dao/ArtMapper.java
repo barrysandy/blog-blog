@@ -33,4 +33,7 @@ public interface ArtMapper {
 	
 	@Select("SELECT id,title FROM t_art WHERE createTime > #{time} LIMIT 0,1")
 	Art getTheNextBean(@Param("time") String time);
+	
+	@Select("SELECT id,title FROM t_art WHERE typese = #{typese} ORDER BY rand() LIMIT 0,#{size}")
+	List<Art> getRandomByTypes(@Param("size") int size, @Param("typese") String typese);
 }

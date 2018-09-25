@@ -28,12 +28,16 @@ public class MyStudyController {
 	@Value("${app.pageSize}")
 	private Integer pageSize;
 	
+	@Value("${art.typese1}")
+	private String setTypese;
+	
+	
 	@GetMapping("/index")
 	public String index(HttpServletRequest request,String search,String typese,Integer cpage) {
 		//Init
 		if(search == null) { search = ""; }
 		if(cpage == null) { cpage = 1; }
-		if(typese == null || "".equals(typese)) { typese = ""; }
+		if(typese == null || "".equals(typese)) { typese = setTypese; }
 		try {
 			int totalCurrent = blogArtService.getCountService(search, typese);
 			int totalPage = PageUtils.totalPage(totalCurrent, pageSize);
@@ -71,8 +75,12 @@ public class MyStudyController {
 				Art previous = blogArtService.getThePreviousBeanService(bean.getCreateTime());
 				Art next = blogArtService.getTheNextBeanService(bean.getCreateTime());
 				
-				System.out.println("previous: " + previous);
-				System.out.println("next: " + next);
+//				System.out.println("previous: " + previous);
+//				System.out.println("next: " + next);
+				
+				//随机推荐
+				List<Art> listRandom = blogArtService.getRandomByTypesService(10, bean.getTypese());
+				request.setAttribute("listRandom", listRandom);
 				
 				request.setAttribute("list", list);
 				request.setAttribute("lables", lables);

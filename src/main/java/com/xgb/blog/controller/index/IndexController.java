@@ -6,6 +6,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,12 +23,15 @@ public class IndexController {
 	@Autowired private BlogArtService blogArtService;
 	@Autowired private BlogLabelService blogLabelService;
 	
+	@Value("${art.typese1}")
+	private String setTypese;
+	
 	@GetMapping("")
 	public String index(HttpServletRequest request) {
 		try {
-			List<Art> list = blogArtService.getListService(0, 10, "","",-1);
+			List<Art> list = blogArtService.getListService(0, 10, "",setTypese,-1);
 			List<Label> listLable = blogLabelService.getCloudLabels();
-			List<Art> listClick = blogArtService.getListService(0, 10, "","",1);
+			List<Art> listClick = blogArtService.getListService(0, 10, "",setTypese,1);
 			
 			request.setAttribute("list", list);
 			request.setAttribute("listLable", listLable);

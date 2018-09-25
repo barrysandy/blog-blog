@@ -42,7 +42,7 @@
 		resultMap="BaseResultMap" resultType="java.util.List">
 		select
 		<include refid="Base_Column_List_NoCoutent" />
-		from t_art WHERE 1 = 1
+		from t_art WHERE typese = #{typese}
 		<if test="search != null and search != ''">
         	AND title LIKE concat(concat('%',#{search}),'%') ESCAPE '/'
         	OR descM LIKE concat(concat('%',#{search}),'%') ESCAPE '/'
@@ -65,7 +65,7 @@
 	
 	<select id="getCount" parameterType="com.xgb.org.domain.Art" resultType="int">
 		select count(*)
-		from t_art WHERE 1 = 1
+		from t_art WHERE typese = #{typese}
 		<if test="search != null and search != ''">
         	AND title LIKE concat(concat('%',#{search}),'%') ESCAPE '/'
         </if>

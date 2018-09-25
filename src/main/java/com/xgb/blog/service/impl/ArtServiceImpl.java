@@ -80,5 +80,10 @@ public class ArtServiceImpl implements BlogArtService {
 		return artMapper.getTheNextBean(time);
 	}
 
+	@Override
+	public List<Art> getRandomByTypesService(int size, String typese) throws Exception {
+		return artMapper.getRandomByTypes(size, typese);
+	}
+
 
 }
