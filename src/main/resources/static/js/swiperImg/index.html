@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>jquery多功能响应式相册插件Strip - 站长素材</title>
+<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="js/strip/strip.min.js"></script>
+<link rel="stylesheet" type="text/css" href="css/strip/strip.css"/>
+<style>
+*{margin:0;padding:0;list-style:none;}
+p{display:block;text-align:center;margin:20px auto;}
+a{color:#333;text-decoration:underline;}
+</style>
+<script>
+$(function(){
+	$("#sucaijiayuan").click(function(){
+		Strip.show([
+		  { url: 'images/dm1.jpg', caption: 'Caption for this image',options:{side:'top'}},
+		  { url: 'images/dm2.jpg', caption: 'Another caption',options:{side:'bottom'}},
+		  { url: 'images/dm1.jpg', caption: 'Another caption',options:{side:'left'}},
+		  { url: 'images/dm2.jpg', caption: 'Another caption',options:{side:'right'}},
+		]);
+	});
+});
+</script>
+</head>
+<body>
+<br /><br /><br />
+<p><a href="images/john_singer.jpg" class="strip">单张图片</a></p>
+
+<p><a href="images/john_singer.jpg" class="strip" data-strip-caption="可以自定义图片标题哦（sc.chinaz.com）">自定义图片标题</a></p>
+
+<p><a href="images/john_singer.jpg" class="strip" data-strip-caption="可以自定义方向和最大宽度哦" data-strip-options="side:'left',maxWidth:500">自定义参数（左边展开，最大宽度500像素）</a></p>
+
+<p><a href="images/dm1.jpg" class="strip" data-strip-group="mygroup">相册图片一（右侧展开）</a>
+<a href="images/dm2.jpg" class="strip" data-strip-group="mygroup">相册图片二（右侧展开）</a></p>
+
+<p><a href="images/dm1.jpg" class="strip" data-strip-group="top-options" data-strip-group-options="side:'top'">相册图片一（顶部展开）</a>
+<a href="images/dm2.jpg" class="strip" data-strip-group="top-options">相册图片二（顶部展开）</a></p>
+
+<p><a href="images/dm1.jpg" class="strip" data-strip-group="shared-options" data-strip-group-options="side:'bottom'">相册图片一（底部展开）</a>
+<a href="images/dm2.jpg" class="strip" data-strip-group="shared-options">相册图片二（底部展开）</a></p>
+
+<p id="sucaijiayuan">JS点击事件触发</p>
+<!--<p><a href="https://www.youtube.com/watch?v=QGJuMBdaqIw" class="strip" data-strip-options="width:853,height: 480,youtube: { autoplay: 0 }">youtube视频</a></p>
+<p><a href="http://vimeo.com/channels/staffpicks/108128386" class="strip"  data-strip-options="vimeo:{autoplay:0,portrait: 1}">Vimeo视频</a></p>-->
+<div style="text-align:center;margin:50px 0; font:normal 14px/24px 'MicroSoft YaHei';">
+<p>适用浏览器：IE8、360、FireFox、Chrome、Safari、Opera、傲游、搜狗、世界之窗. </p>
+<p>来源：<a href="http://sc.chinaz.com/" target="_blank">站长素材</a></p>
+</div>
+</body>
+</html>

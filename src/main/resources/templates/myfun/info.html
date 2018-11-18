@@ -11,22 +11,34 @@
 	<link th:href="@{/css/index.css}" href="css/index.css" rel="stylesheet">
 	<link th:href="@{/css/m.css}" href="css/m.css" rel="stylesheet">
 	
-	<!--[if lt IE 9]>
-	<script src="js/modernizr.js"></script>
-	<![endif]-->
-	<script>
-	window.onload = function ()
-	{
-		var oH2 = document.getElementsByTagName("h2")[0];
-		var oUl = document.getElementsByTagName("ul")[0];
-		oH2.onclick = function ()
-		{
-			var style = oUl.style;
-			style.display = style.display == "block" ? "none" : "block";
-			oH2.className = style.display == "block" ? "open" : ""
-		}
+	<script type="text/javascript" th:src="@{/js/swiperImg/js/jquery-1.11.1.min.js}"></script>
+	<script type="text/javascript" th:src="@{/js/swiperImg/js/strip/strip.min.js}"></script>
+	<link rel="stylesheet" type="text/css" th:href="@{/js/swiperImg/css/strip/strip.css}"/>
+	<style>
+	*{margin:0;padding:0;list-style:none;}
+	p{display:block;text-align:center;margin:20px auto;}
+	</style>
+	<script th:inline="javascript">
+	var images = [[${images}]];
+	var array = new Array();
+	for(var i=0;i<images.length;i++){
+		var obj = {};
+		var urlTemp = images[i].substr(1);
+		obj.url = urlTemp.substring(0,urlTemp.length-1);
+		obj.caption = '';
+		var options = {};
+		options.side = 'top';
+		obj.options = options;
+		array.push(obj);
 	}
+	$(function(){
+		$(".news_about").click(function(){
+			Strip.show(array);
+		});
+	});
 	</script>
+	
+
 	</head>
 	<body>
 		<header>
@@ -57,7 +69,7 @@
 		      <div class="tags" th:if="${lables!=null}">
 		      	<a th:each="lable:${lables}" th:utext="${' &nbsp;' + lable.name + ' &nbsp;'}">标签名称</a>
 		      </div>
-		      <div class="news_about" th:text="${bean.descM}"><strong>简介</strong></div>
+		      <div class="news_about" th:text="${bean.descM}" th:title="点击查看相册"><strong>简介</strong></div>
 		      <div class="news_infos" th:utext="${bean.content}" style="overflow: scroll;overflow-y:hidden;"></div> 
 		    </div>
 		    <div class="share"> </div>
@@ -127,6 +139,7 @@
 		  <p>Design by <a>凌青子个人博客</a> <!-- <a href="/">蜀ICP备11002373号-1</a> --></p>
 		</footer>
 		
+
 		<script th:src="@{/js/jquery-2.1.1.min.js}"></script>
 		<!-- GoTop -->
 		<div class="scroll" id="scroll" style="display:none;">回到顶部</div>

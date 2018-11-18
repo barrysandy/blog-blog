@@ -1,6 +1,7 @@
 package com.xgb.blog.controller.myfun;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -44,11 +45,34 @@ public class MyFunController {
 			int totalPage = PageUtils.totalPage(totalCurrent, pageSize);
 			int index = (cpage -1) * pageSize;
 			List<Art> list = blogArtService.getListService(index, pageSize, search,typese,-1);
+			List<Art> list1 = new ArrayList<Art>();
+			List<Art> list2 = new ArrayList<Art>();
+			List<Art> list3 = new ArrayList<Art>();
+			if(list != null) {
+				for (int i = 0; i < list.size(); i++) {
+					//0 3 6 9
+					if(i == 0 || i%3 == 0) {
+						list1.add(list.get(i));
+					}
+					//1 4 7 10
+					else if(i != 0 && i%3 == 1) {
+						list2.add(list.get(i));
+					}
+					//2 5 8 11
+					else if(i != 0 && i%3 == 2) {
+						list3.add(list.get(i));
+					}
+				}
+			}
+			
 			if(search != null && !"".equals(search)) { list = getSeachList(list,search,"red"); }
 			List<Label> listLable = blogLabelService.getCloudLabels();
 			List<Art> listClick = list;
 			
 			request.setAttribute("list", list);
+			request.setAttribute("list1", list1);
+			request.setAttribute("list2", list2);
+			request.setAttribute("list3", list3);
 			request.setAttribute("listLable", listLable);
 			request.setAttribute("listClick", listClick);
 			request.setAttribute("search", search);
@@ -68,6 +92,10 @@ public class MyFunController {
 		try {
 			Art bean = blogArtService.getBeanByIdService(id);
 			if(bean != null) {
+				//组装本bean的图集
+				String text = bean.getContent();
+				List<String> images = StringUtils.getListImg(text);
+				System.err.println(images);
 				List<Label> listLable = blogLabelService.getCloudLabels();//Cloud Labels
 				List<Label> lables = bean.getLabels();//Current Art Labels
 				List<Art> list = blogArtService.getListService(0, 10, "","",-1);//Arts
@@ -83,6 +111,7 @@ public class MyFunController {
 				List<Art> listRandom = blogArtService.getRandomByTypesService(10, bean.getTypese());
 				request.setAttribute("listRandom", listRandom);
 				
+				request.setAttribute("images", images);
 				request.setAttribute("list", list);
 				request.setAttribute("lables", lables);
 				request.setAttribute("listLable", listLable);
@@ -118,5 +147,34 @@ public class MyFunController {
 			}
 		}
 		return list;
+	}
+	
+	@GetMapping("/index2")
+	public String index2(HttpServletRequest request,String search,String typese,Integer cpage) {
+		//Init
+		if(search == null) { search = ""; }
+		if(cpage == null) { cpage = 1; }
+		if(typese == null || "".equals(typese)) { typese = setTypese; }
+		try {
+			int totalCurrent = blogArtService.getCountService(search, typese);
+			int totalPage = PageUtils.totalPage(totalCurrent, pageSize);
+			int index = (cpage -1) * pageSize;
+			List<Art> list = blogArtService.getListService(index, pageSize, search,typese,-1);
+			if(search != null && !"".equals(search)) { list = getSeachList(list,search,"red"); }
+			List<Label> listLable = blogLabelService.getCloudLabels();
+			List<Art> listClick = list;
+			
+			request.setAttribute("list", list);
+			request.setAttribute("listLable", listLable);
+			request.setAttribute("listClick", listClick);
+			request.setAttribute("search", search);
+			request.setAttribute("typese", typese);
+			request.setAttribute("totalPage", totalPage);
+			request.setAttribute("cpage", cpage);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return "myfun/share";
 	}
 }
