@@ -1,6 +1,7 @@
 package com.xgb.blog.controller.myfun;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -47,8 +48,28 @@ public class MyFunController {
 			if(search != null && !"".equals(search)) { list = getSeachList(list,search,"red"); }
 			List<Label> listLable = blogLabelService.getCloudLabels();
 			List<Art> listClick = list;
-			
+			List<Art> list1 = new ArrayList<>();
+			List<Art> list2 = new ArrayList<>();
+			List<Art> list3 = new ArrayList<>();
+			if(list != null){
+				if(list.size() > 0){
+					for (int i = 0; i < list.size(); i++) {
+						if(i == 0 || i%3 == 0){
+							list1.add(list.get(i));
+						}
+						if(i%3 == 1){
+							list2.add(list.get(i));
+						}
+						if(i%3 == 2){
+							list3.add(list.get(i));
+						}
+					}
+				}
+			}
 			request.setAttribute("list", list);
+			request.setAttribute("list1", list1);
+			request.setAttribute("list2", list2);
+			request.setAttribute("list3", list3);
 			request.setAttribute("listLable", listLable);
 			request.setAttribute("listClick", listClick);
 			request.setAttribute("search", search);
@@ -68,6 +89,10 @@ public class MyFunController {
 		try {
 			Art bean = blogArtService.getBeanByIdService(id);
 			if(bean != null) {
+				//组装本bean的图集
+				String text = bean.getContent();
+				List<String> images = StringUtils.getListImg(text);
+				System.err.println(images);
 				List<Label> listLable = blogLabelService.getCloudLabels();//Cloud Labels
 				List<Label> lables = bean.getLabels();//Current Art Labels
 				List<Art> list = blogArtService.getListService(0, 10, "","",-1);//Arts
@@ -76,13 +101,11 @@ public class MyFunController {
 				Art previous = blogArtService.getThePreviousBeanService(bean.getCreateTime());
 				Art next = blogArtService.getTheNextBeanService(bean.getCreateTime());
 				
-//				System.out.println("previous: " + previous);
-//				System.out.println("next: " + next);
-				
 				//随机推荐
 				List<Art> listRandom = blogArtService.getRandomByTypesService(10, bean.getTypese());
 				request.setAttribute("listRandom", listRandom);
 				
+				request.setAttribute("images", images);
 				request.setAttribute("list", list);
 				request.setAttribute("lables", lables);
 				request.setAttribute("listLable", listLable);

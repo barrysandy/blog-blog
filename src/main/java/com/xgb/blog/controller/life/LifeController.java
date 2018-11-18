@@ -1,6 +1,7 @@
 package com.xgb.blog.controller.life;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -47,8 +48,28 @@ public class LifeController {
 			if(search != null && !"".equals(search)) { list = getSeachList(list,search,"red"); }
 			List<Label> listLable = blogLabelService.getCloudLabels();
 			List<Art> listClick = list;
-			
+			List<Art> list1 = new ArrayList<>();
+			List<Art> list2 = new ArrayList<>();
+			List<Art> list3 = new ArrayList<>();
+			if(list != null){
+				if(list.size() > 0){
+					for (int i = 0; i < list.size(); i++) {
+						if(i == 0 || i%3 == 0){
+							list1.add(list.get(i));
+						}
+						if(i%3 == 1){
+							list2.add(list.get(i));
+						}
+						if(i%3 == 2){
+							list3.add(list.get(i));
+						}
+					}
+				}
+			}
 			request.setAttribute("list", list);
+			request.setAttribute("list1", list1);
+			request.setAttribute("list2", list2);
+			request.setAttribute("list3", list3);
 			request.setAttribute("listLable", listLable);
 			request.setAttribute("listClick", listClick);
 			request.setAttribute("search", search);

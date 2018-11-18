@@ -47,13 +47,35 @@
 	  <h1 class="t_nav"><span>不要轻易放弃。学习成长的路上，我们长路漫漫，只因学无止境。 </span><a th:href="@{/index}" href="/" class="n1">网站首页</a><a th:href="@{/myfun/index}" href="/" class="n2">我的娱乐</a></h1>
 		<div class="picbox">
 			<div th:if="${list.size() != 0}">
-				<ul th:each="list:${list}">
-					<li>
+				<ul>
+					<li th:each="list:${list1}">
 						<a th:href="${'info/' + list.id }" th:title="${list.title}">
 							<i><img th:src="${list.image}" onerror="this.src='/blog/images/b04.jpg'"></i>
 							<div class="picinfo">
 								<h3 th:utext="${list.title}" style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;"></h3>
-								<span th:utext="${list.descM}" style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;"></span>
+								<span th:utext="${list.descM}" style="overflow: hidden;text-overflow: ellipsis;/* white-space: nowrap; */"></span>
+							</div>
+				        </a>
+					</li>
+				</ul>
+				<ul>
+					<li th:each="list:${list2}">
+						<a th:href="${'info/' + list.id }" th:title="${list.title}">
+							<i><img th:src="${list.image}" onerror="this.src='/blog/images/b04.jpg'"></i>
+							<div class="picinfo">
+								<h3 th:utext="${list.title}" style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;"></h3>
+								<span th:utext="${list.descM}" style="overflow: hidden;text-overflow: ellipsis;/* white-space: nowrap; */"></span>
+							</div>
+				        </a>
+					</li>
+				</ul>
+				<ul>
+					<li th:each="list:${list3}">
+						<a th:href="${'info/' + list.id }" th:title="${list.title}">
+							<i><img th:src="${list.image}" onerror="this.src='/blog/images/b04.jpg'"></i>
+							<div class="picinfo">
+								<h3 th:utext="${list.title}" style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;"></h3>
+								<span th:utext="${list.descM}" style="overflow: hidden;text-overflow: ellipsis;/* white-space: nowrap; */"></span>
 							</div>
 				        </a>
 					</li>
