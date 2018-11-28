@@ -45,20 +45,6 @@ spring:
     maxOpenPreparedStatements: 20
     logSlowSql: true
 
-
-# REDIS (RedisProperties)
-# Redis数据库索引（默认为0）
-#  redis:
-#      database: 0
-#      timeout: 0
-#      host: 120.55.49.68
-#      port: 9100
-#      password: 123456
-#      pool:
-#        maxactive：8
-#        maxwait: -1
-#        maxidle: 8
-#        minidle: 0
         
 mybatis:
   config-location: classpath:mybatis.xml
