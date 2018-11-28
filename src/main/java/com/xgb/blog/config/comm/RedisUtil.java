@@ -11,6 +11,7 @@ import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 import org.springframework.stereotype.Component;
 
+
 @SuppressWarnings("unchecked")
 @Component
 public class RedisUtil {
@@ -18,6 +19,16 @@ public class RedisUtil {
     @Autowired
     private RedisTemplate redisTemplate;
 
+	private static class SignletonHolder{
+		private static final RedisUtil INSTANCE = new RedisUtil();
+	}
+	
+	private RedisUtil() {}
+	
+	public static final RedisUtil getInstance() {
+		return SignletonHolder.INSTANCE;
+	}
+	
     /**
      * 批量删除对应的value
      * 

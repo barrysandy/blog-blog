@@ -43,6 +43,7 @@ public class ArtServiceImpl implements BlogArtService {
 	@Override
 //	@Transactional(readOnly=true)
 	public List<Art> getListService(int index, int pageSize,String search,String typese,int sort) {
+		System.err.println("getListService");
 		//PageHelper.startPage(index, pageSize,typese);
 		List<Art> list = artMapper.getList(search,typese,sort,index,pageSize);
 		return list;

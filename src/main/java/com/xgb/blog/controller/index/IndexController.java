@@ -32,7 +32,6 @@ public class IndexController {
 			List<Art> list = blogArtService.getListService(0, 10, "",setTypese,-1);
 			List<Label> listLable = blogLabelService.getCloudLabels();
 			List<Art> listClick = blogArtService.getListService(0, 10, "",setTypese,1);
-			
 			request.setAttribute("list", list);
 			request.setAttribute("listLable", listLable);
 			request.setAttribute("listClick", listClick);
