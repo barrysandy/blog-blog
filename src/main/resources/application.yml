@@ -16,7 +16,7 @@ spring:
 
   # 开发时关闭缓存,不然没法看到实时页面
   thymeleaf:
-    cache: false
+    cache: true
 
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
@@ -29,6 +29,8 @@ spring:
     url: jdbc:mysql://124.161.16.164:11306/db_web_service?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true
     password: 123456
 
+#    url: jdbc:mysql://localhost:3306/blog?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true
+#    password: root
     
     filters: stat,wall,log4j
     maxActive: 20

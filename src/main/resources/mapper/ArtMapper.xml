@@ -34,15 +34,14 @@
 	
 	<!-- 按ID查询 -->
 	<select id="getBeanById" parameterType="com.xgb.org.domain.Art" resultMap="BaseResultMap">
-		select <include refid="Base_Column_Bean" /> from t_art where id = #{id}
+		select <include refid="Base_Column_Bean" /> from t_art where id = #{id} AND statuses = 1
 	</select>
 	
 	<!-- getList -->
-	<select id="getList" parameterType="java.util.Map"
-		resultMap="BaseResultMap" resultType="java.util.List">
+	<select id="getList" parameterType="java.util.Map" resultMap="BaseResultMap" resultType="java.util.List">
 		select
 		<include refid="Base_Column_List_NoCoutent" />
-		from t_art WHERE typese = #{typese}
+		from t_art WHERE typese = #{typese} AND statuses =#{statuses}
 		<if test="search != null and search != ''">
         	AND title LIKE concat(concat('%',#{search}),'%') ESCAPE '/'
         	OR descM LIKE concat(concat('%',#{search}),'%') ESCAPE '/'

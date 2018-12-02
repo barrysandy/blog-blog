@@ -42,7 +42,7 @@ public class MyStudyController {
 			int totalCurrent = blogArtService.getCountService(search, typese);
 			int totalPage = PageUtils.totalPage(totalCurrent, pageSize);
 			int index = (cpage -1) * pageSize;
-			List<Art> list = blogArtService.getListService(index, pageSize, search,typese,-1);
+			List<Art> list = blogArtService.getListService(index, pageSize, search,typese,-1,1);
 			if(search != null && !"".equals(search)) { list = getSeachList(list,search,"red"); }
 			List<Label> listLable = blogLabelService.getCloudLabels();
 			List<Art> listClick = list;
@@ -69,7 +69,7 @@ public class MyStudyController {
 			if(bean != null) {
 				List<Label> listLable = blogLabelService.getCloudLabels();//Cloud Labels
 				List<Label> lables = bean.getLabels();//Current Art Labels
-				List<Art> list = blogArtService.getListService(0, 10, "","",-1);//Arts
+				List<Art> list = blogArtService.getListService(0, 10, "","",-1,1);//Arts
 				blogArtService.updateViewsService(bean.getId(), bean.getViews(),bean.getViews() + 1);
 				
 				Art previous = blogArtService.getThePreviousBeanService(bean.getCreateTime());

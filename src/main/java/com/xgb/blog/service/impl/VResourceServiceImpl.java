@@ -39,7 +39,7 @@ public class VResourceServiceImpl implements VResourceService {
 	
 	@Override
 	public List<VResource> getListService(int index, int pageSize, String search) throws Exception {
-		List<Art> list = blogArtService.getListService(index, pageSize, search,"",-1);
+		List<Art> list = blogArtService.getListService(index, pageSize, search,"",-1,1);
 		if(search != null && !"".equals(search)) { list = MyStudyController.getSeachList(list,search,"red"); }
 		List<VResource> listRes = new ArrayList<>();
 		

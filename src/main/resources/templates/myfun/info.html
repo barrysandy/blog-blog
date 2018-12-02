@@ -14,10 +14,19 @@
 	<!--[if lt IE 9]>
 	<script src="js/modernizr.js"></script>
 	<![endif]-->
+	<script type="text/javascript" th:src="@{/js/swiperImg/js/jquery-1.11.1.min.js}"></script>
+	<script type="text/javascript" th:src="@{/js/swiperImg/js/strip/strip.min.js}"></script>
+	<link rel="stylesheet" type="text/css" th:href="@{/js/swiperImg/css/strip/strip.css}"/>
+	
 	<style>
-	*{margin:0;padding:0;list-style:none;}
-	p{display:block;text-align:center;margin:20px auto;}
+		*{margin:0;padding:0;list-style:none;}
+		p{display:block;text-align:center;margin:20px auto;}
+		.cursor{cursor:pointer}
+		*{margin:0;padding:0;list-style:none;}
+		p{display:block;text-align:center;margin:20px auto;}
+		.strp-window{height: 100%;}
 	</style>
+	
 	<script th:inline="javascript">
 	var images = [[${images}]];
 	var array = new Array();
@@ -31,10 +40,13 @@
 		obj.options = options;
 		array.push(obj);
 	}
+	
 	function opend(){
 		Strip.show(array);
 	}
 	</script>
+	
+
 	</head>
 	<body>
 		<header>
@@ -56,16 +68,18 @@
 		  <h1 class="t_nav"><span>不要轻易放弃。学习成长的路上，我们长路漫漫，只因学无止境。 </span><a th:href="@{/index}" class="n1">网站首页</a><a th:href="@{/myfun/index}" class="n2">我的娱乐</a></h1>
 		  <div class="infos">
 		    <div class="newsview">
-		      <h3 class="news_title" th:text="${bean.title}">个人博客，属于我的小世界！</h3>
+		      <h3 class="news_title" th:text="${bean.title}"></h3>
 		      <div class="news_author">
 		      	<span class="au01"><a href="mailto:865815412@qq.com">凌青子</a></span>
 		      	<span class="au02" th:text="${bean.createTime}"></span>
 		      	<span class="au03">共<b th:text="${bean.views}">
-		      	<script src="/e/public/ViewClick/?classid=5&amp;id=816&amp;addclick=1"></script>0</b>人围观</span></div>
+		      	<script src="/e/public/ViewClick/?classid=5&amp;id=816&amp;addclick=1"></script>0</b>人围观</span>
+		      	<span class="cursor" th:title="点击查看相册" onclick="opend()">查看相册</span>
+		      </div>
 		      <div class="tags" th:if="${lables!=null}">
 		      	<a th:each="lable:${lables}" th:utext="${' &nbsp;' + lable.name + ' &nbsp;'}">标签名称</a>
 		      </div>
-		      <div class="news_about" th:text="${bean.descM}" th:title="点击查看相册" onclick="opend()"><strong>简介</strong></div>
+		      <div class="news_about cursor" th:text="${bean.descM}" th:title="${bean.descM}"><strong>简介</strong></div>
 		      <div class="news_infos" th:utext="${bean.content}" style="overflow: scroll;overflow-y:hidden;"></div> 
 		    </div>
 		    <div class="share"> </div>
@@ -135,6 +149,7 @@
 		  <p>Design by <a>凌青子个人博客</a> <!-- <a href="/">蜀ICP备11002373号-1</a> --></p>
 		</footer>
 		
+
 		<script th:src="@{/js/jquery-2.1.1.min.js}"></script>
 		<!-- GoTop -->
 		<div class="scroll" id="scroll" style="display:none;">回到顶部</div>

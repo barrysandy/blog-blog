@@ -16,7 +16,7 @@ public interface ArtMapper {
 	Art getBeanById(@Param("id") String id);
 	
 	List<Art> getList(@Param("search") String search,@Param("typese") String typese,@Param("sort") int sort,
-			@Param("index") int index, @Param("pageSize") int pageSize);
+			@Param("index") int index, @Param("pageSize") int pageSize,@Param("statuses") int statuses);
 	
 	int getCount(@Param("search") String search,@Param("typese") String typese);
 	

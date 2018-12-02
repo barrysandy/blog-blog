@@ -27,7 +27,7 @@ public class MyFunController {
 	@Autowired private BlogArtService blogArtService;
 	@Autowired private BlogLabelService blogLabelService;
 	
-	@Value("${app.pageSize}")
+	@Value("${app.blogPageSize}")
 	private Integer pageSize;
 	
 	@Value("${art.typese2}")
@@ -44,7 +44,7 @@ public class MyFunController {
 			int totalCurrent = blogArtService.getCountService(search, typese);
 			int totalPage = PageUtils.totalPage(totalCurrent, pageSize);
 			int index = (cpage -1) * pageSize;
-			List<Art> list = blogArtService.getListService(index, pageSize, search,typese,-1);
+			List<Art> list = blogArtService.getListService(index, pageSize, search,typese,-1,1);
 			if(search != null && !"".equals(search)) { list = getSeachList(list,search,"red"); }
 			List<Label> listLable = blogLabelService.getCloudLabels();
 			List<Art> listClick = list;
@@ -92,10 +92,9 @@ public class MyFunController {
 				//组装本bean的图集
 				String text = bean.getContent();
 				List<String> images = StringUtils.getListImg(text);
-				System.err.println(images);
 				List<Label> listLable = blogLabelService.getCloudLabels();//Cloud Labels
 				List<Label> lables = bean.getLabels();//Current Art Labels
-				List<Art> list = blogArtService.getListService(0, 10, "","",-1);//Arts
+				List<Art> list = blogArtService.getListService(0, 10, "","",-1,1);//Arts
 				blogArtService.updateViewsService(bean.getId(), bean.getViews(),bean.getViews() + 1);
 				
 				Art previous = blogArtService.getThePreviousBeanService(bean.getCreateTime());
@@ -141,5 +140,34 @@ public class MyFunController {
 			}
 		}
 		return list;
+	}
+	
+	@GetMapping("/index2")
+	public String index2(HttpServletRequest request,String search,String typese,Integer cpage) {
+		//Init
+		if(search == null) { search = ""; }
+		if(cpage == null) { cpage = 1; }
+		if(typese == null || "".equals(typese)) { typese = setTypese; }
+		try {
+			int totalCurrent = blogArtService.getCountService(search, typese);
+			int totalPage = PageUtils.totalPage(totalCurrent, pageSize);
+			int index = (cpage -1) * pageSize;
+			List<Art> list = blogArtService.getListService(index, pageSize, search,typese,-1,1);
+			if(search != null && !"".equals(search)) { list = getSeachList(list,search,"red"); }
+			List<Label> listLable = blogLabelService.getCloudLabels();
+			List<Art> listClick = list;
+			
+			request.setAttribute("list", list);
+			request.setAttribute("listLable", listLable);
+			request.setAttribute("listClick", listClick);
+			request.setAttribute("search", search);
+			request.setAttribute("typese", typese);
+			request.setAttribute("totalPage", totalPage);
+			request.setAttribute("cpage", cpage);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return "myfun/share";
 	}
 }

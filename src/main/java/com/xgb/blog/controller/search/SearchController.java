@@ -40,7 +40,7 @@ public class SearchController {
 		//Init
 		if(search == null) { search = ""; }
 		try {
-			List<Art> list = blogArtService.getListService(0, pageSize, search,"",-1);
+			List<Art> list = blogArtService.getListService(0, pageSize, search,"",-1,1);
 			if(search != null && !"".equals(search)) { list = MyStudyController.getSeachList(list,search,"red"); }
 			
 			request.setAttribute("list", list);
